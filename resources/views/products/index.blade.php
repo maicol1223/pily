@@ -48,14 +48,14 @@
                                                 <td>{{ $product->image }}</td>
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->quantity }}</td>
-                                                <td>
+                                                <td class=" d-flex mr-3">
                                                     {{-- @can('products.edit') --}}
                                                     <a href="{{ route('products.edit', $product->id) }}"
                                                         class="btn btn-info btn-sm" title=Edit>
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
                                                     {{-- @endcan --}}
-                                                    <form class="d-inline-delete-form"
+                                                    <form class="d-inline-delete-form pl-4"
                                                         action="{{ route('products.destroy', $product) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -74,7 +74,7 @@
                                             <th>Image</th>
                                             <th>Price</th>
                                             <th>Quantity</th>
-                                            <th>Action</th>
+                                            <th>Action</th> -->
                                         </tr>
                                     </tfoot>
                                 </table>
