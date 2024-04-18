@@ -9,7 +9,6 @@
             <div class="container-fluid">
             </div>
         </section>
-
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -18,7 +17,7 @@
                             <div class="card-header bg-secondary">
                                 <h3>@yield('title')</h3>
                             </div>
-                            <form method="POST" action="{{ route('products.store') }}">
+                            <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="row">
@@ -26,43 +25,37 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Nombre <strong
                                                         style="color:red;">(*)</strong></label>
-                                                <input type="text" class="form-control" name="nombre"
-                                                    placeholder="Por ejemplo, Positiva" autocomplete="off"
-                                                    value="{{ old('nombre') }}">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Descripcion <strong
+                                                <input type="text" class="form-control" name="name"
+                                                    placeholder=" Nombre del producto " autocomplete="off"
+                                                    value="{{ old('name') }}">
+                                                <label class="control-label">Description <strong
                                                         style="color:red;">(*)</strong></label>
-                                                <textarea name="description" placeholder="Ingrese la descripcion del producto" id="" cols="120"
-                                                    rows="4"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                                            <div class="form-group label-floating">
+                                                <textarea type="text" class="form-control" name="description" placeholder=" Descripcion del producto "
+                                                    autocomplete="off" value="{{ old('description') }}"></textarea>
+                                                <label class="control-label">Amount <strong
+                                                        style="color:red;">(*)</strong></label>
+                                                <input type="text" class="form-control" name="amount"
+                                                    placeholder=" Cantidad " autocomplete="off" value="{{ old('amount') }}">
                                                 <label class="control-label">Price <strong
                                                         style="color:red;">(*)</strong></label>
-                                                <input type="text" class="form-control" name="precio" placeholder=""
-                                                    autocomplete="off" value="{{ old('price') }}">
+                                                <input type="text" class="form-control" name="price"
+                                                    placeholder=" Precio " autocomplete="off" value="{{ old('price') }}">
+                                                <div class="form-group">
+                                                    <label class="control-label">Img <strong
+                                                            style="color:red;">(*)</strong></label>
+                                                    <div class="row">
+                                                        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                                                            <div class="form-group label-floating">
+                                                                <label class="control-label">Fotografía</label>
+                                                                <input type="file" class="form-control-file"
+                                                                    name="image" id="image">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">Fotografía</label>
-                                                <input type="file" class="form-control-file" name="image"
-                                                    id="image">
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <input type="hidden" class="form-control" name="estado" value="1">
                                     <input type="hidden" class="form-control" name="registradopor"
                                         value="{{ Auth::user()->id }}">
@@ -80,6 +73,7 @@
                                     </div>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>

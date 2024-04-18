@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use App\Models\Product;
-
+use Illuminate\Support;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 class ProductController extends Controller
 {
+    //
     /**
      * Display a listing of the resource.
      */
@@ -24,6 +25,7 @@ class ProductController extends Controller
     public function create()
     {
         //
+        return view("products.create");
     }
 
     /**
@@ -31,30 +33,36 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        //
+    
+        $product=Product::create($request->all());
         $image = $request->file('image');
-        $slug = Str::slug($request->name);
-        if (isset($image)) {
+        $slug = str::slug($request->nombre);
+        if (isset($image))
+        {
             $currentDate = Carbon::now()->toDateString();
-            $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
+            $imagename = $slug.'-'.$currentDate.'-'. uniqid() .'.'. $image->getClientOriginalExtension();
 
-            if (!file_exists('uploads/products')) {
-                mkdir('uploads/products)', 0777, true);
+            if (!file_exists('uploads/products'))
+            {
+                mkdir('uploads/products',0777,true);
             }
-            $image->move('uploads/products)', $imagename);
-        } else {
+            $image->move('uploads/products',$imagename);
+        }else{
             $imagename = "";
         }
 
+        $products = new Product();
+			$products->id = $request->id;
+			$products->name = $request->name;
+			$products->description = $request->description;
+			$products->amount = $request->amount;
+			$products->price = $request->price;
+            $products->status = $request->status;
+            $products->image = $imagename;
+			$product->save();
+            return redirect()->route('products.index')->with('successMsg','El registro se guardó exitosamente');
 
-        $product = new Product();
-
-        $product->name = $request->name;
-        $product->price = $request->price;
-        $product->description = $request->description;
-        $product->image = $imagename;
-        $product->save();
-
-        return redirect()->route('products.index');
     }
 
     /**
