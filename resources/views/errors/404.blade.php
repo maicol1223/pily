@@ -35,7 +35,7 @@
 
 <body>
     <h1>Page not found.</h1>
-    <h2>(≥o≤)</h2>
+    <h2>\(o_o)/</h2>
     <img src="{{ asset('assets/cow-ufo.gif') }} ">
 </body>
 
