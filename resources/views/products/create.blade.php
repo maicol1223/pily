@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Crear Producto')
+@section('title', 'Register products')
 
 @section('content')
 
@@ -9,6 +9,7 @@
             <div class="container-fluid">
             </div>
         </section>
+        @include('layouts.partial.msg')
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
@@ -26,36 +27,57 @@
                                                 <label class="control-label">Nombre <strong
                                                         style="color:red;">(*)</strong></label>
                                                 <input type="text" class="form-control" name="name"
-                                                    placeholder=" Nombre del producto " autocomplete="off"
-                                                    value="{{ old('name') }}">
-                                                <label class="control-label">Description <strong
-                                                        style="color:red;">(*)</strong></label>
-                                                <textarea type="text" class="form-control" name="description" placeholder=" Descripcion del producto "
-                                                    autocomplete="off" value="{{ old('description') }}"></textarea>
-                                                <label class="control-label">Amount <strong
-                                                        style="color:red;">(*)</strong></label>
-                                                <input type="text" class="form-control" name="amount"
-                                                    placeholder=" Cantidad " autocomplete="off" value="{{ old('amount') }}">
-                                                <label class="control-label">Price <strong
-                                                        style="color:red;">(*)</strong></label>
-                                                <input type="text" class="form-control" name="price"
-                                                    placeholder=" Precio " autocomplete="off" value="{{ old('price') }}">
-                                                <div class="form-group">
-                                                    <label class="control-label">Img <strong
-                                                            style="color:red;">(*)</strong></label>
-                                                    <div class="row">
-                                                        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
-                                                            <div class="form-group label-floating">
-                                                                <label class="control-label">Fotografía</label>
-                                                                <input type="file" class="form-control-file"
-                                                                    name="image" id="image">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                    placeholder="Ingrese el nombre del producto" autocomplete="off"
+                                                    value="{{ old('nombre') }}">
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Descripcion <strong
+                                                        style="color:red;">(*)</strong></label>
+                                                <textarea class="form-control" name="description" placeholder="Ingrese la descripcion del producto" id=""
+                                                    cols="120" rows="4"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Cantidad <strong
+                                                        style="color:red;">(*)</strong></label>
+                                                <input type="text" class="form-control" name="stock"
+                                                    placeholder="Ingrese la cantidad del producto" autocomplete="off"
+                                                    value="{{ old('nombre') }}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Precio<strong
+                                                        style="color:red;">(*)</strong></label>
+                                                <input type="text" class="form-control" name="price"
+                                                    placeholder="Ingrese el precio del producto" autocomplete="off"
+                                                    value="{{ old('nombre') }}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-sm-4 col-md-4 col-xs-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Imagen</label>
+                                                <input type="file" class="form-control-file" name="image"
+                                                    id="image">
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <input type="hidden" class="form-control" name="estado" value="1">
                                     <input type="hidden" class="form-control" name="registradopor"
                                         value="{{ Auth::user()->id }}">
@@ -64,16 +86,15 @@
                                     <div class="row">
                                         <div class="col-lg-2 col-xs-4">
                                             <button type="submit"
-                                                class="btn btn-primary btn-block btn-flat">Registrar</button>
+                                                class="btn btn-primary btn-block btn-flat">Registrer</button>
                                         </div>
                                         <div class="col-lg-2 col-xs-4">
                                             <a href="{{ route('products.index') }}"
-                                                class="btn btn-danger btn-block btn-flat">Atras</a>
+                                                class="btn btn-danger btn-block btn-flat">Back</a>
                                         </div>
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
