@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Register products')
+@section('title', 'Crear productos')
 
 @section('content')
 
@@ -49,7 +49,7 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Cantidad <strong
                                                         style="color:red;">(*)</strong></label>
-                                                <input type="text" class="form-control" name="stock"
+                                                <input type="text" class="form-control" name="quantity"
                                                     placeholder="Ingrese la cantidad del producto" autocomplete="off"
                                                     value="{{ old('nombre') }}">
                                             </div>
@@ -86,7 +86,7 @@
                                     <div class="row">
                                         <div class="col-lg-2 col-xs-4">
                                             <button type="submit"
-                                                class="btn btn-primary btn-block btn-flat">Registrer</button>
+                                                class="btn btn-primary btn-block btn-flat">Register</button>
                                         </div>
                                         <div class="col-lg-2 col-xs-4">
                                             <a href="{{ route('products.index') }}"

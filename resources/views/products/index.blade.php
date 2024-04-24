@@ -8,7 +8,9 @@
         <section class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
+
                     @include('layouts.partial.msg')
+
                 </div>
             </div><!-- /.container-fluid -->
         </section>
@@ -57,7 +59,7 @@
                                                     @endif
                                                 </td>
                                                 <td>{{ $product->price }}</td>
-                                                <td>{{ $product->stock }}</td>
+                                                <td>{{ $product->quantity }}</td>
                                                 <td>
                                                     <a href="{{ route('products.edit', $product->id) }}"
                                                         class="btn btn-info btn-sm" tittle="Editar">
