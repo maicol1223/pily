@@ -92,6 +92,11 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset('backend/dist/js/pages/dashboard.js') }}"></script>
 
+    <link rel="stylesheet" href="{{ asset('backend/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/dist/css/select2.css') }}">
+    <script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
+
     <!-- DataTables  & Plugins -->
     <script src="{{ asset('backend/plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('backend/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
