@@ -69,13 +69,20 @@ class ProductController extends Controller
     public function update(Request $request, Product $id)
     {
         $id->update($request->all());
-        return redirect()->route("products.index")->with("success","Product updated succefully.");
+        return redirect()->route("products.index")->with("success", "Product updated succefully.");
     }
 
 
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route("products.index")->with("success","The product has been deleted.");
+        return redirect()->route("products.index")->with("success", "The product has been deleted.");
+    }
+
+    public function changeproducturl(Request $request)
+    {
+        $product = Product::find($request->product_id);
+        $product->status = $request->status;
+        $product->save();
     }
 }

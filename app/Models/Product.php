@@ -18,11 +18,14 @@ class Product extends Model
         'price',
         'quantity',
         'provider_id',
+        'status',
+        'registered_by',
     ];
 
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'status', 'registered_by'];
 
-    public function provider() {
+    public function provider()
+    {
         return $this->belongsTo(Provider::class);
     }
 

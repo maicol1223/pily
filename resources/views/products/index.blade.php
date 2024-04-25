@@ -38,7 +38,8 @@
                                             <th>Description</th>
                                             <th>Image</th>
                                             <th>Price</th>
-                                            <th>Stock</th>
+                                            <th>Quantity</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -61,6 +62,12 @@
                                                 <td>{{ $product->price }}</td>
                                                 <td>{{ $product->quantity }}</td>
                                                 <td>
+                                                    <input data-id="{{ $product->id }}" class="toggle-class"
+                                                        type="checkbox" data-onstyle="success" data-offstyle="danger"
+                                                        data-toggle="toggle" data-on="Active" data-off="Inactive"
+                                                        {{ $product->status ? 'checked' : '' }}>
+                                                </td>
+                                                <td>
                                                     <a href="{{ route('products.edit', $product->id) }}"
                                                         class="btn btn-info btn-sm" tittle="Editar">
                                                         <i class="fas fa-pencil-alt"></i>
@@ -77,17 +84,6 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <th width="10px">ID</th>
-                                            <th>Name</th>
-                                            <th>Description</th>
-                                            <th>Image</th>
-                                            <th>Price</th>
-                                            <th>Stock</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                             <!-- /.card-body -->
@@ -149,6 +145,30 @@
     </script>
 
     <script>
+        $(document).ready(function() {
+            $("example1").DataTable()
+        });
+        $(function() {
+            $('.toggle-class').change(function() {
+                var estado = $(this).prop('checked') == true ? 1 : 0;
+                var arl_id = $(this).data('id');
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: 'changeproducturl',
+                    data: {
+                        'status': estado,
+                        'product_id': arl_id
+                    },
+                    success: function(data) {
+                        console.log(data.success)
+                    }
+                });
+            })
+        })
+    </script>
+
+    <script>
         $('.delete-form').submit(function(e) {
             e.preventDefault();
             Swal.fire({
@@ -167,7 +187,7 @@
             })
         });
     </script>
-    
+
     @if (session('eliminar') == 'ok')
         <script>
             Swal.fire(
