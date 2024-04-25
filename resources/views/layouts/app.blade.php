@@ -41,6 +41,9 @@
     <link rel="stylesheet" href="{{ asset('backend/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="stylesheet" href="{{asset('backend/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+
+    <script defer src="{{asset('backend/plugins/sweetalert2/sweetalert2.min.js')}}"></script>
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -100,7 +103,7 @@
     <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('backend/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
-    <script src="https://kit.fontawesome.com/b479edefa4.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/dbdbdc884e.js" crossorigin="anonymous"></script>
 
     @stack('scripts')
 </body>

@@ -147,4 +147,34 @@
             }); //.buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
     </script>
+
+    <script>
+        $('.delete-form').submit(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Estas seguro?',
+                text: "Este registro se eliminara definitivamente",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            })
+        });
+    </script>
+    
+    @if (session('eliminar') == 'ok')
+        <script>
+            Swal.fire(
+                'Eliminado',
+                'El registro ha sido eliminado exitosamente',
+                'success'
+            )
+        </script>
+    @endif
 @endpush
