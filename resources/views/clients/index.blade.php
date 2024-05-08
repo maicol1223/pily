@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('tittle', 'Listado de productos')
+@section('tittle', 'List of clients')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
