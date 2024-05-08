@@ -46,7 +46,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="pages/charts/chartjs.html" class="nav-link">
+                            <a href="{{ route('clients.index') }}" class="nav-link">
                                 <i class="fa-solid fa-user nav-icon"></i>
                                 <p>Cliente</p>
                             </a>

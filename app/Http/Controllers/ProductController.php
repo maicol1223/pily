@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use Illuminate\Support;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -16,7 +15,7 @@ class ProductController extends Controller
         $products = Product::all();
         return view("products.index", compact("products"));
     }
-
+ 
 
     public function create()
     {
