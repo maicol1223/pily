@@ -159,10 +159,10 @@
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: 'changeproducturl',
+                    url: 'changeclienturl',
                     data: {
                         'status': estado,
-                        'product_id': arl_id
+                        'client_id': arl_id
                     },
                     success: function(data) {
                         console.log(data.success)

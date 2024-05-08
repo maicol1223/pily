@@ -26,7 +26,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $image = $request->file('image');
-        $slug = str::slug($request->nombre);
+        $slug = str::slug($request->name);
         if (isset($image)) {
             $currentDate = Carbon::now()->toDateString();
             $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
@@ -70,10 +70,34 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $id)
     {
-        $id->update($request->all());
-        return redirect()->route("products.index")->with("success", "Product updated succefully.");
-    }
+        $image = $request->file('image');
+        $slug = str::slug($request->name);
+        if (isset($image)) {
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $slug . '-' . $currentDate . '-' . uniqid() . '.' . $image->getClientOriginalExtension();
 
+            if (!file_exists('uploads/products')) {
+                mkdir('uploads/products', 0777, true);
+            }
+            $image->move('uploads/products', $imagename);
+        } else {
+            $imagename = "";
+        }
+
+
+
+        $product = new Product();
+        $product->name = $request->name;
+        $product->image = $imagename;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->quantity = $request->quantity;
+        $product->status = $request->status;
+        $product->save();
+
+
+        return redirect()->route("products.index")->with("success", "Product successfully updated.");
+    }
 
     public function destroy(Product $product)
     {

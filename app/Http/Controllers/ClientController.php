@@ -93,4 +93,11 @@ class ClientController extends Controller
     {
         //
     }
+
+    public function changeclienturl(Request $request)
+    {
+        $product = Client::find($request->client_id);
+        $product->status = $request->status;
+        $product->save();
+    }
 }
