@@ -72,12 +72,12 @@
                                                         {{ $client->status ? 'checked' : '' }}>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('products.edit', $client->id) }}"
+                                                    <a href="{{ route('clients.edit', $client->id) }}"
                                                         class="btn btn-info btn-sm" tittle="Editar">
                                                         <i class="fas fa-pencil-alt"></i>
                                                     </a>
                                                     <form class="d-inline delete-form"
-                                                        action="{{ route('products.destroy', $client) }}" method="POST">
+                                                        action="{{ route('clients.destroy', $client) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger btn-sm"
