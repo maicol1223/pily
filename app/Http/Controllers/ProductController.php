@@ -15,7 +15,7 @@ class ProductController extends Controller
         $products = Product::all();
         return view("products.index", compact("products"));
     }
- 
+
 
     public function create()
     {
@@ -63,7 +63,8 @@ class ProductController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $product = Product::find($id);
+        return view("products.edit", compact("product"));
     }
 
 
