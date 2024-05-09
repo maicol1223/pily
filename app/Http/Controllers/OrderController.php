@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -23,7 +24,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $orders = Order::where('status', '=', '1')->orderBy('total')->get();
+        return view('orders.create', compact('orders'));
     }
 
     /**
@@ -31,7 +33,18 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = new Order();
+        $idOrder = $order->id;
+
+        $i = 0;
+        while ($i < count($request->item)) {
+            $orderDetail = new OrderDetail();
+            $order->order_id = $idOrder;
+            $orderDetail->save();
+        }
+
+        $order->client_id = $request->client_id;
+        $order->save();
     }
 
     /**
