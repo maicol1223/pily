@@ -33,14 +33,11 @@
                                 <table id="example1" class="table table-bordered table-hover">
                                     <thead class="text-primary">
                                         <tr>
-                                            <th width="10px">ID</th>
-                                            <th>Name</th>
-                                            <th>Photo</th>
-                                            <th>Address</th>
-                                            <th>City</th>
-                                            <th>Phone</th>
-                                            <th>Email</th>
-                                            <th>Status</th>
+                                            <th>ID</th>
+                                            <th>Name Client</th>
+                                            <th>Document</th>
+                                            <th>Date</th>
+                                            <th>Total</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -48,44 +45,36 @@
                                         @foreach ($orders as $order)
                                             <tr>
                                                 <td>{{ $order->id }}</td>
-                                                <td>{{ $order->name }}</td>
-                                                <td>
-                                                    @if ($order->photo != null)
-                                                        <center>
-                                                            <p><img class="img-responsive img-thumbnail"
-                                                                    src="{{ asset('uploads/orders/' . $order->photo) }}"
-                                                                    style="height: 70px; width: 70px;" alt=""></p>
-                                                        </center>
-                                                    @elseif ($order->photo == null)
-                                                        There is not photo.
-                                                    @endif
-                                                </td>
-                                                <td>{{ $order->address }}</td>
+                                                <td>{{ $order->client->name }}</td>
+                                                <td>{{ $order->client->document }}</td>
+                                                <td>{{ $order->date_order }}</td>
+                                                <td>{{ $order->total_amount }}</td>
 
-                                                <td>{{ $order->city }}</td>
-                                                <td>{{ $order->phone }}</td>
-                                                <td>{{ $order->email }}</td>
+
                                                 <td>
                                                     <input data-id="{{ $order->id }}" class="toggle-class"
                                                         type="checkbox" data-onstyle="success" data-offstyle="danger"
-                                                        data-toggle="toggle" data-on="Active" data-off="Inactive"
+                                                        data-toggle="toggle" data-on="Activo" data-off="Inactivo"
                                                         {{ $order->status ? 'checked' : '' }}>
                                                 </td>
+
                                                 <td>
-                                                    <a href="{{ route('orders.edit', $order->id) }}"
-                                                        class="btn btn-info btn-sm" tittle="Editar">
-                                                        <i class="fas fa-pencil-alt"></i>
-                                                    </a>
+
+
+                                                    <a class="btn btn-info btn-sm"
+                                                        href="{{ route('orders.edit', $order->id) }}" title="Edit"><i
+                                                            class="fas fa-pencil-alt"></i></a>
+
                                                     <form class="d-inline delete-form"
                                                         action="{{ route('orders.destroy', $order) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"
-                                                            tittle="Eliminar">
+                                                        <button type="submit" class=" btn btn-danger btn-sm"
+                                                            title="Delete">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
-                                            </tr>
+                                                </td>
                                         @endforeach
                                     </tbody>
                                 </table>
