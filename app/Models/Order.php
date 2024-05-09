@@ -12,6 +12,11 @@ class Order extends Model
     public $timestamps = false;
 
     protected $fillable = [
+        'date_order',
+        'total',
+        'route',
+        'status',
+        "registered_by",
         'client_id',
     ];
 

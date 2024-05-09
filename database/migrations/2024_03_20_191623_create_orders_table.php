@@ -13,6 +13,13 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
 
+            $table->dateTime('date_order');
+            $table->decimal('total');
+            $table->string('route');
+
+            $table->string('registered_by')->nullable();
+            $table->string('status')->nullable();
+
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')
                 ->references('id')
