@@ -18,11 +18,13 @@ class Order extends Model
         'status',
         "registered_by",
         'client_id',
+        'order_detail_id',
     ];
 
     protected $guarded = ['id'];
 
-    public function client() {
+    public function client()
+    {
         return $this->belongsTo(Client::class);
     }
 

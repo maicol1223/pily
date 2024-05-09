@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -11,7 +12,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::select('clients.name', 'clients.document', 'orders.order_detail_id', 'orders.total')
+            ->join('clients', 'orders.client_id', '=', 'clients.id')
+            ->get();
+        return view('orders.index', compact('orders'));
     }
 
     /**

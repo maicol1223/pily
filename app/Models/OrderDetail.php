@@ -16,16 +16,17 @@ class OrderDetail extends Model
         'subtotal',
         'registered_by',
         'product_id',
-        'order_id',
     ];
 
     protected $guarded = ['id'];
 
-    public function product() {
+    public function product()
+    {
         return $this->belongsTo(Product::class);
     }
 
-    public function order() {
+    public function order()
+    {
         return $this->belongsTo(Order::class);
     }
 }
