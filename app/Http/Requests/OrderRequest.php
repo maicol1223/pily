@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProductRequests extends FormRequest
+class OrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,13 +21,13 @@ class ProductRequests extends FormRequest
      */
     public function rules(): array
     {
-        if (request()->isMethod("post")) {
-            return [
-                "name" => "required",
-                "image" => "nullable",
-                "description" => "required",
-            ];
-        } elseif (request()->isMethod("put")) {
-        }
+        return [
+            'date_order' => 'required|date',
+            'total' => 'required|numeric',
+            'route' => 'required|string',
+            'status' => 'required|string',
+            'registered_by' => 'required|string',
+            'client_id' => 'required|integer',
+        ];
     }
 }
