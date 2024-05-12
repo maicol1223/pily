@@ -39,6 +39,28 @@
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Product<strong
+                                                        style="color:red;">(*)</strong></label>
+                                                <select type="text" class="form-control" name="client"
+                                                    value="{{ old('client') }}">
+                                                    <option value="-1">Enter the client</option>
+                                                    @foreach ($clients as $client)
+                                                        <option value="{{ $client->id }}">{{ $client->name }}
+                                                            ({{ $client->document }})
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" class="form-control" name="order_detail[]" value="a">
+                                    <input type="hidden" class="form-control" name="order_detail[]" value="b">
+                                    <input type="hidden" class="form-control" name="order_detail[]" value="c">
+
                                     <input type="hidden" class="form-control" name="status" value="1">
                                     <input type="hidden" class="form-control" name="registered_by"
                                         value="{{ Auth::user()->id }}">

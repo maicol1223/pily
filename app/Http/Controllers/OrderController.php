@@ -16,8 +16,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::select('clients.name', 'clients.document', 'orders.order_detail_id', 'orders.id', 'orders.total', 'orders.date_order')
+        $orders = Order::select('clients.name', 'clients.document', 'orders.id', 'orders.total', 'orders.date_order', 'order_details')
             ->join('clients', 'orders.client_id', '=', 'clients.id')
+            ->join('order_details', 'order_details.order_id', '=', 'orders.id')
             ->get();
         return view('orders.index', compact('orders'));
     }
@@ -36,21 +37,24 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = new Order();
-        $order->date_order = Carbon::now()->toDateTimeString();
-        $order->total = 0;
-        $order->route = "Por hacer";
+        $order = Order::create([
+            'date_order' => Carbon::now()->toDateTimeString(),
+            'total' => 0,
+            'route' => "Por hacer",
+            'client_id' => Client::find($request->client)->id,
+        ]);
+
         $order->status = $request->status;
         $order->registered_by = $request->registered_by;
-        $order->client_id = Client::find($request->client)->id;
 
-        $orderDetail = new OrderDetail();
-        $orderDetail->quantity = 0;
-        $orderDetail->subtotal = 0;
-        $orderDetail->product_id = Product::find(2)->id; // TODO: Remove hardcode.
-        $orderDetail->save();
-
-        $order->order_detail_id = $orderDetail->id;
+        $rawOrderDetail = $request->order_detail;
+        for ($i = 0; $i < count($rawOrderDetail); $i++) {
+            $order->order_details()->create([
+                'quantity' => 0,
+                'subtotal' => 0,
+                'product_id' => Product::find(1)->id, // TODO: Remove hardcode.
+            ]);
+        }
 
         $order->save();
 
