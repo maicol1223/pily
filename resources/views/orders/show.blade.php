@@ -16,14 +16,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            @foreach ($details as $detail)
+
+                        @foreach ($details as $detail)
+                            <tr>
                                 <th>{{ $detail->product_id }}</th>
                                 <th> Conseguir precio </th>
                                 <th> {{ $detail->quantity }} </th>
                                 <th>${{ $detail->subtotal }}</th>
-                            @endforeach
-                        </tr>
+                            </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>
