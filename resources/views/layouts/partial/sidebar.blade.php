@@ -67,6 +67,31 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
+                        <i class="nav-icon fa-solid fa-money-bills"></i>
+                        <p>
+                            Pedido
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('orders.index') }}" class="nav-link">
+                                <i class="fa-solid fa-user nav-icon"></i>
+                                <p>Consultar</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('orders.create') }}" class="nav-link">
+                                <i class="fa-solid fa-bread-slice nav-icon"></i>
+                                <p>Añadir</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
                         <i class="nav-icon fa-solid fa-shop"></i>
                         <p>
                             Compras

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -13,7 +16,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::select('clients.name', 'clients.document', 'orders.order_detail_id', 'orders.id', 'orders.total')
+        $orders = Order::select('clients.name', 'clients.document', 'orders.order_detail_id', 'orders.id', 'orders.total', 'orders.date_order')
             ->join('clients', 'orders.client_id', '=', 'clients.id')
             ->get();
         return view('orders.index', compact('orders'));
@@ -24,8 +27,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        $orders = Order::where('status', '=', '1')->orderBy('total')->get();
-        return view('orders.create', compact('orders'));
+        $clients = Client::all();
+        return view('orders.create', compact('clients'));
     }
 
     /**
@@ -34,17 +37,24 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $order = new Order();
-        $idOrder = $order->id;
+        $order->date_order = Carbon::now()->toDateTimeString();
+        $order->total = 0;
+        $order->route = "Por hacer";
+        $order->status = $request->status;
+        $order->registered_by = $request->registered_by;
+        $order->client_id = Client::find($request->client)->id;
 
-        $i = 0;
-        while ($i < count($request->item)) {
-            $orderDetail = new OrderDetail();
-            $order->order_id = $idOrder;
-            $orderDetail->save();
-        }
+        $orderDetail = new OrderDetail();
+        $orderDetail->quantity = 0;
+        $orderDetail->subtotal = 0;
+        $orderDetail->product_id = Product::find(2)->id; // TODO: Remove hardcode.
+        $orderDetail->save();
 
-        $order->client_id = $request->client_id;
+        $order->order_detail_id = $orderDetail->id;
+
         $order->save();
+
+        return redirect()->route("orders.index")->with("success", "The orders has been created.");
     }
 
     /**
