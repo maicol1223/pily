@@ -50,7 +50,6 @@
                                                 <td>{{ $order->document }}</td>
                                                 <td>{{ $order->date_order }}</td>
                                                 <td>{{ $order->total_amount }}</td>
-                                                <td> DEBUG: {{ $order->order_details }} </td>
 
                                                 <td>
                                                     <input data-id="{{ $order->id }}" class="toggle-class"

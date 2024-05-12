@@ -16,11 +16,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::select('clients.name', 'clients.document', 'orders.id', 'orders.total', 'orders.date_order', 'order_details')
+        $orders = Order::select('clients.name', 'clients.document', 'orders.id', 'orders.total', 'orders.date_order')
             ->join('clients', 'orders.client_id', '=', 'clients.id')
+            ->get();
+        $order_details = Order::select('order_details')
             ->join('order_details', 'order_details.order_id', '=', 'orders.id')
             ->get();
-        return view('orders.index', compact('orders'));
+
+        return view('orders.index', compact('orders', 'order_details'));
     }
 
     /**
@@ -29,7 +32,8 @@ class OrderController extends Controller
     public function create()
     {
         $clients = Client::all();
-        return view('orders.create', compact('clients'));
+        $products = Product::all();
+        return view('orders.create', compact('clients', "products"));
     }
 
     /**
@@ -44,15 +48,19 @@ class OrderController extends Controller
             'client_id' => Client::find($request->client)->id,
         ]);
 
-        $order->status = $request->status;
+        $order->status = 1;
         $order->registered_by = $request->registered_by;
 
-        $rawOrderDetail = $request->order_detail;
-        for ($i = 0; $i < count($rawOrderDetail); $i++) {
+        $rawProductId = $request->product_id;
+        $rawQuantity = $request->quantity;
+        for ($i = 0; $i < count($rawProductId); $i++) {
+            $product = Product::find($rawProductId[$i]);
+            $quantity = $rawQuantity[$i];
+
             $order->order_details()->create([
-                'quantity' => 0,
-                'subtotal' => 0,
-                'product_id' => Product::find(1)->id, // TODO: Remove hardcode.
+                'quantity' => $quantity,
+                'subtotal' => $product->price * $quantity,
+                'product_id' => $product->id,
             ]);
         }
 
@@ -88,8 +96,9 @@ class OrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Order $order)
     {
-        //
+        $order->delete();
+        return redirect()->route("orders.index")->with("success", "The order has been deleted.");
     }
 }
