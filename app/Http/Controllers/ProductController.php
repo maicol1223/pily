@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Carbon\Carbon;
@@ -23,7 +24,7 @@ class ProductController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $image = $request->file('image');
         $slug = str::slug($request->name);
@@ -68,8 +69,12 @@ class ProductController extends Controller
     }
 
 
-    public function update(Request $request, Product $id)
+    public function update(Request $request, string $id)
     {
+        //
+
+        $product = Product::find($id);
+
         $image = $request->file('image');
         $slug = str::slug($request->name);
         if (isset($image)) {
@@ -81,22 +86,19 @@ class ProductController extends Controller
             }
             $image->move('uploads/products', $imagename);
         } else {
-            $imagename = "";
+            $imagename = $product->image;
         }
 
-
-
-        $product = new Product();
+        
         $product->name = $request->name;
         $product->image = $imagename;
         $product->description = $request->description;
         $product->price = $request->price;
         $product->quantity = $request->quantity;
-        $product->status = $request->status;
+        $product->registered_by = $request->user()->id;
         $product->save();
 
-
-        return redirect()->route("products.index")->with("success", "Product successfully updated.");
+        return redirect()->route('products.index')->with('successMsg','El registro se actualizó exitosamente');
     }
 
     public function destroy(Product $product)
