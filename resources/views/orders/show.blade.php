@@ -3,6 +3,7 @@
 @section('title', 'Bill')
 
 @section('content')
+
     <div class="content-wrapper">
         <section class="content">
             <div class="container-fluid">
@@ -19,8 +20,8 @@
 
                         @foreach ($details as $detail)
                             <tr>
-                                <th>{{ $detail->product_id }}</th>
-                                <th> Conseguir precio </th>
+                                <th>{{ $detail->product->name }}</th>
+                                <th> ${{ $detail->product->price }} </th>
                                 <th> {{ $detail->quantity }} </th>
                                 <th>${{ $detail->subtotal }}</th>
                             </tr>

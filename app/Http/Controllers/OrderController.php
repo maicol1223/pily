@@ -79,7 +79,7 @@ class OrderController extends Controller
     public function show(string $id)
     {
         $order = Order::find($id);
-        $details = OrderDetail::select('order_details.product_id', 'order_details.quantity', 'order_details.subtotal')
+        $details = OrderDetail::with('product')
             ->where('order_details.order_id', '=', $id)
             ->get();
 
