@@ -79,11 +79,12 @@ class OrderController extends Controller
     public function show(string $id)
     {
         $order = Order::find($id);
+        $client = Client::where("id", $order->client_id)->first();
         $details = OrderDetail::with('product')
             ->where('order_details.order_id', '=', $id)
             ->get();
 
-        return view("orders.show", compact("order", "details"));
+        return view("orders.show", compact("order", "client", "details"));
     }
 
     /**
