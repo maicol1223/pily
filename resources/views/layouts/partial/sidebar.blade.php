@@ -16,25 +16,25 @@
                 <li class="nav-item">
                     <a href="{{ route('home') }}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>Página principal</p>
+                        <p>Home</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('clients.index') }}" class="nav-link">
                         <i class="fa-solid fa-user nav-icon"></i>
-                        <p>Cliente</p>
+                        <p>Clients</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('products.index') }}" class="nav-link">
                         <i class="fa-solid fa-bread-slice nav-icon"></i>
-                        <p>Producto</p>
+                        <p>Products</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('orders.index') }}" class="nav-link">
                         <i class="fa-solid fa-scroll nav-icon"></i>
-                        <p>Venta/Factura</p>
+                        <p>Bills</p>
                     </a>
                 </li>
             </ul>
