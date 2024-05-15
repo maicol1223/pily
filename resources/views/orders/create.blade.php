@@ -105,6 +105,7 @@
                                                 Total: $0
                                             </span>
                                         </div>
+                                        <input name="total" hidden>
                                         <div class="col-4">
                                             <button type="submit"
                                                 class="btn btn-primary btn-block btn-flat">Register</button>
@@ -160,6 +161,7 @@
             let total = 0;
 
             let totalText = $('#total-text')
+            let totalInput = $('[name="total"]')
 
             addButton.on("click", (e) => {
                 e.preventDefault()
@@ -170,6 +172,7 @@
                 total += price * quantity
 
                 totalText.text(`Total: ${total}`)
+                totalInput.val(total)
 
                 listProducts.append(generateHTML(
                     productSelect.find(':selected').data('name'),
