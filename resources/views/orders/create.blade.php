@@ -86,6 +86,13 @@
         </section>
     </div>
 
+    <style>
+        .select2 [role="textbox"] {
+            margin-top: -8px !important;
+            margin-left: -8px !important;
+        }
+    </style>
+
     <script>
         fields = document.querySelector("#form-fields")
         addButton = document.querySelector("#add-field-button")
