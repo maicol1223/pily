@@ -68,11 +68,16 @@
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
-                                        <div class="col-lg-2 col-xs-4">
+                                        <div class="col-4">
+                                            <span class="h3 d-block text-center m-1">
+                                                Total: $56
+                                            </span>
+                                        </div>
+                                        <div class="col-4">
                                             <button type="submit"
                                                 class="btn btn-primary btn-block btn-flat">Register</button>
                                         </div>
-                                        <div class="col-lg-2 col-xs-4">
+                                        <div class="col-4">
                                             <a href="{{ route('clients.index') }}"
                                                 class="btn btn-danger btn-block btn-flat">Back</a>
                                         </div>
