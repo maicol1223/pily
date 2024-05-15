@@ -44,33 +44,65 @@
                                             <input type="hidden" class="form-control" name="status" value="1">
                                             <input type="hidden" class="form-control" name="registered_by"
                                                 value="{{ Auth::user()->id }}">
-
-                                            <span id="add-field-button" class="form-control btn btn-primary">
-                                                Add product
-                                            </span>
                                         </div>
                                     </div>
 
                                     <div class="row mt-2" data-details-field=true>
-                                        <div class="col-12">
-                                            <select class="form-control select2" name="product_id[]">
-                                                <option value="-1">Please select a product</option>
+                                        <div class="col-3">
+                                            <select id="product" class="form-control" name="product_id[]">
                                                 @foreach ($products as $product)
-                                                    <option value="{{ $product->id }}">{{ $product->name }}
-                                                        (${{ $product->price }})
+                                                    <option value="{{ $product->id }}" data-price="{{ $product->price }}"
+                                                        data-name="{{ $product->name }}">
+                                                        {{ $product->name }}
                                                     </option>
                                                 @endforeach
                                             </select>
+                                        </div>
+                                        <div class="col-2">
+                                            <label for="quantity">Quantity</label>
+                                            <input type="number" name="quantity">
+                                        </div>
+                                        <div class="col-2">
+                                            <label for="price">Price</label>
+                                            <input type="number" name="price" readonly
+                                                value="{{ $products[0]->price }}">
+                                        </div>
+                                        <div class="col-2">
+                                            <label for="subtotal">Subtotal</label>
+                                            <input type="number" name="subtotal" readonly>
+                                        </div>
+                                        <div class="col-2">
+                                            <button class="btn btn-primary" id="add-btn">
+                                                Add
+                                            </button>
+                                        </div>
+                                    </div>
 
-                                            <input type="number" class="form-control" name="quantity[]" value="1">
+                                    <div class="row">
+                                        <div class="col-11 m-5">
+                                            <table class="table border">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Product</th>
+                                                        <th scope="col">Quantity</th>
+                                                        <th scope="col">Price</th>
+                                                        <th scope="col">Subtotal</th>
+                                                        <th scope="col">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tbody id="list-products">
+                                                </tbody>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <div class="row">
                                         <div class="col-4">
-                                            <span class="h3 d-block text-center m-1">
-                                                Total: $56
+                                            <span class="h3 d-block text-center m-1" id="total-text">
+                                                Total: $0
                                             </span>
                                         </div>
                                         <div class="col-4">
@@ -97,25 +129,74 @@
             margin-left: -8px !important;
         }
     </style>
-
-    <script>
-        fields = document.querySelector("#form-fields")
-        addButton = document.querySelector("#add-field-button")
-
-        addButton.addEventListener("click", () => {
-            elem = createRowWithFields()
-            fields.appendChild(elem)
-        })
-
-        function createRowWithFields() {
-            return document.querySelector("[data-details-field=true]").cloneNode(true);
-        }
-    </script>
 @endsection
+
 @push('scripts')
     <script>
+        function generateHTML(name, quantity, price) {
+            const subtotal = quantity * price;
+            return $.parseHTML(`
+                <tr>
+                    <td>${name}</td>
+                    <td>${quantity}</td>
+                    <td>$${price}</td>
+                    <td>$${subtotal}</td>
+                    <td>TODO</td>
+                </tr>
+                `)
+        }
+
         $(document).ready(function() {
-            $('.select2').select2();
+            let listProducts = $('#list-products')
+            let addButton = $('#add-btn')
+
+            let productSelect = $('#product')
+            productSelect.select2();
+
+            let productPrice = $('[name="price"]')
+            let productQuantity = $('[name="quantity"]')
+            let productSubtotal = $('[name="subtotal"]')
+
+            let total = 0;
+
+            let totalText = $('#total-text')
+
+            addButton.on("click", (e) => {
+                e.preventDefault()
+
+                quantity = parseInt(productQuantity.val())
+                price = parseInt(productPrice.val())
+
+                total += price * quantity
+
+                totalText.text(`Total: ${total}`)
+
+                listProducts.append(generateHTML(
+                    productSelect.find(':selected').data('name'),
+                    quantity,
+                    price,
+                ))
+            })
+
+            function updateSubtotal() {
+                productSubtotal.val(parseInt(productPrice.val()) * parseInt(productQuantity.val()))
+            }
+
+            productSelect.on('select2:select', function(e) {
+                let price = productSelect.find(':selected').data('price');
+                console.log(price)
+
+                productPrice.val(price)
+
+                updateSubtotal()
+            });
+
+            productQuantity.on('input', function(e) {
+                updateSubtotal()
+            })
+
+
+            updateSubtotal()
         });
     </script>
 @endpush
