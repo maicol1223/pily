@@ -26,7 +26,7 @@
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Client<strong
                                                         style="color:red;">(*)</strong></label>
-                                                <select type="text" class="form-control" name="client"
+                                                <select type="text" class="form-control select2" name="client"
                                                     value="{{ old('client') }}">
                                                     <option value="-1">Enter the client</option>
                                                     @foreach ($clients as $client)
@@ -53,7 +53,7 @@
 
                                     <div class="row mt-2" data-details-field=true>
                                         <div class="col-12">
-                                            <select class="form-control" name="product_id[]">
+                                            <select class="form-control select2" name="product_id[]">
                                                 <option value="-1">Please select a product</option>
                                                 @foreach ($products as $product)
                                                     <option value="{{ $product->id }}">{{ $product->name }}
@@ -100,3 +100,10 @@
         }
     </script>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
+@endpush
