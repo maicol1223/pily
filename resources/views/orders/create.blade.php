@@ -50,6 +50,7 @@
                                     <div class="row mt-2" data-details-field=true>
                                         <div class="col-3">
                                             <select id="product" class="form-control" name="product_id[]">
+                                            <option value="-">Select a product</option>
                                                 @foreach ($products as $product)
                                                     <option value="{{ $product->id }}" data-price="{{ $product->price }}"
                                                         data-name="{{ $product->name }}">
@@ -65,7 +66,7 @@
                                         <div class="col-2">
                                             <label for="price">Price</label>
                                             <input type="number" name="price" readonly
-                                                value="{{ $products[0]->price }}">
+                                                value="">
                                         </div>
                                         <div class="col-2">
                                             <label for="subtotal">Subtotal</label>
@@ -87,7 +88,6 @@
                                                         <th scope="col">Quantity</th>
                                                         <th scope="col">Price</th>
                                                         <th scope="col">Subtotal</th>
-                                                        <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -142,12 +142,12 @@
                     <td>${quantity}</td>
                     <td>$${price}</td>
                     <td>$${subtotal}</td>
-                    <td>TODO</td>
                 </tr>
                 `)
         }
 
         $(document).ready(function() {
+            $('.select2').select2()
             let listProducts = $('#list-products')
             let addButton = $('#add-btn')
 
@@ -182,6 +182,13 @@
                     quantity,
                     price,
                 ))
+
+                productQuantity.val('')
+                productPrice.val('')
+                productSubtotal.val('')
+
+                productSelect.val('-')
+                productSelect.trigger('change');
             })
 
             function updateSubtotal() {
