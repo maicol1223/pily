@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
 
             $table->dateTime('date_order');
-            $table->decimal('total');
             $table->string('route');
 
             $table->string('registered_by')->nullable();

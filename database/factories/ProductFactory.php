@@ -18,8 +18,14 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->colorName,
-            'price' => $this->faker->randomFloat(2, 0, 1000),
             'description' => $this->faker->text,
+
+            'registered_by' => \App\Models\User::factory(),
+            'status' => "1",
+
+            'price' => $this->faker->randomFloat(2, 0, 1000),
+            'quantity' => $this->faker->numberBetween(0, 100),
+
             'provider_id' => \App\Models\Provider::factory(),
         ];
     }

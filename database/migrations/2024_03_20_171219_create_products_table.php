@@ -16,8 +16,10 @@ return new class extends Migration {
             $table->string('name');
             $table->string('image')->nullable();
             $table->string('description');
+
             $table->string('registered_by')->nullable();
             $table->string('status')->nullable();
+
             $table->decimal('price', 8, 2);
             $table->integer('quantity')->default(0);
 

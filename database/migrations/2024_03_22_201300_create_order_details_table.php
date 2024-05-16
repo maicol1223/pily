@@ -12,10 +12,7 @@ return new class extends Migration {
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-
             $table->integer('quantity');
-            $table->integer('subtotal');
-            $table->string('registered_by')->nullable();
 
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')
