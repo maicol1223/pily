@@ -15,6 +15,7 @@ return new class extends Migration {
 
             $table->dateTime('date_order');
             $table->string('route');
+            $table->float('total');
 
             $table->string('registered_by')->nullable();
             $table->string('status')->nullable();

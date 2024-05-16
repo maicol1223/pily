@@ -18,6 +18,7 @@ class OrderFactory extends Factory
     {
         return [
             'date_order' => $this->faker->dateTime(),
+            'total' => $this->faker->randomFloat(0, 10000, 500000),
             'route' => $this->faker->colorName(),
 
             'registered_by' => \App\Models\User::factory(),
