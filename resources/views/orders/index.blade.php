@@ -49,7 +49,7 @@
                                                 <td>{{ $order->name }}</td>
                                                 <td>{{ $order->document }}</td>
                                                 <td>{{ $order->date_order }}</td>
-                                                <td>{{ $order->total }}</td>
+                                                <td>${{ $order->total }}</td>
 
                                                 <td>
                                                     <input data-id="{{ $order->id }}" class="toggle-class"
@@ -59,7 +59,7 @@
                                                 </td>
 
                                                 <td>
-                                                    <a href="{{ route('orders.show', $order) }}"
+                                                    <a href="{{ route('orders.show', $order) }}" style="display: none"
                                                         class="btn btn-primary btn-sm" title="View bill">
                                                         <i class="fa-solid fa-eye"></i>
                                                     </a>
