@@ -163,16 +163,19 @@
             let totalText = $('#total-text')
             let totalInput = $('[name="total"]')
 
+            function updateTotal(n) {
+                total += n
+                totalText.text(`Total: $${total}`)
+                totalInput.val(total)
+            }
+
             addButton.on("click", (e) => {
                 e.preventDefault()
 
                 quantity = parseInt(productQuantity.val())
                 price = parseInt(productPrice.val())
 
-                total += price * quantity
-
-                totalText.text(`Total: ${total}`)
-                totalInput.val(total)
+                updateTotal(price * quantity)
 
                 listProducts.append(generateHTML(
                     productSelect.find(':selected').data('name'),

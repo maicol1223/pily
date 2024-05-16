@@ -67,7 +67,7 @@ class OrderController extends Controller
             $total += $subtotal;
         }
 
-        $order->total = $total;
+        //$order->total = $total;
         $order->save();
 
         return redirect()->route("orders.index")->with("success", "The orders has been created.");
