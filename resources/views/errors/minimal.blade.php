@@ -19,6 +19,13 @@
         .msg {
             font-size: 25px;
         }
+
+        .btn {
+            display: block;
+            margin: 20px;
+            padding: 20px;
+            font-size: 40px;
+        }
     </style>
 </head>
 
@@ -32,6 +39,9 @@
         Mensaje: @yield('message')
     </div>
 
+    <a class="btn" href="/home">
+        Ir a Inicio
+    </a>
 </body>
 
 </html>
