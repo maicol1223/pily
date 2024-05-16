@@ -17,7 +17,7 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'date_order' => $this->faker->dateTime(),
+            'date_order' => $this->faker->unique()->dateTime(),
             'total' => $this->faker->randomFloat(0, 10000, 500000),
             'route' => $this->faker->colorName(),
 

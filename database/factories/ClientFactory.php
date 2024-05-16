@@ -18,11 +18,11 @@ class ClientFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'document' => $this->faker->numberBetween(1234567890, 2134567890),
-            'address' => $this->faker->address,
+            'document' => $this->faker->unique()->numberBetween(1234567890, 2134567890),
+            'address' => $this->faker->unique()->address,
             'city' => $this->faker->city,
-            'phone' => $this->faker->phoneNumber,
-            'email' => $this->faker->email,
+            'phone' => $this->faker->unique()->phoneNumber,
+            'email' => $this->faker->unique()->email,
             'registered_by' => \App\Models\User::factory(),
             'status' => "1",
         ];
