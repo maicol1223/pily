@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClientRequest;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 
@@ -31,7 +32,7 @@ class ClientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
         $image = $request->file('photo');
         $slug = str::slug($request->name);
@@ -83,7 +84,7 @@ class ClientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ClientRequest $request, string $id)
     {
         $client = Client::find($id);
 

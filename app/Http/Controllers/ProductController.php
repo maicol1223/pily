@@ -24,7 +24,7 @@ class ProductController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $image = $request->file('image');
         $slug = str::slug($request->name);
@@ -69,7 +69,7 @@ class ProductController extends Controller
     }
 
 
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, string $id)
     {
         //
 
