@@ -58,9 +58,9 @@ class OrderController extends Controller
             $quantity = $rawQuantity[$i];
             $subtotal = $product->price * $quantity;
 
-            $order->order_details()->create([
+            $order->orderDetail()->create([
                 'quantity' => $quantity,
-                'subtotal' => $subtotal,
+                //'subtotal' => $subtotal,
                 'product_id' => $product->id,
             ]);
 
