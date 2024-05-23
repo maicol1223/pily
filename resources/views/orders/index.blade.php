@@ -59,7 +59,7 @@
                                                 </td>
 
                                                 <td>
-                                                    <a href="{{ route('orders.show', $order) }}" style="display: none"
+                                                    <a href="{{ route('orders.show', $order) }}"
                                                         class="btn btn-primary btn-sm" title="View bill">
                                                         <i class="fa-solid fa-eye"></i>
                                                     </a>
