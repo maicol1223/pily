@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Models\Product;
 use App\Models\Client;
 use App\Models\Order;
-use App\Models\Product;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -29,25 +29,12 @@ class HomeController extends Controller
     {
         $productCount = Product::where('status', '=', '1')->count();
         $clientCount = Client::where('status', '=', '1')->count();
-
-        $date = Carbon::now()->format('Y-m-d');
-
-        $orderDayCount = Order::whereDate('date_order', '=', $date)->get()->count();
-        $orderDayTotal = Order::whereDate('date_order', '=', $date)->get()->sum("total");
-
-        $orderMonthCount = Order::whereMonth('date_order', date('m'))->get()->count();
-        $orderMonthTotal = Order::whereMonth('date_order', date('m'))->get()->sum("total");
-
-        return view(
-            'home',
-            compact(
-                'productCount',
-                'clientCount',
-                'orderDayCount',
-                'orderDayTotal',
-                'orderMonthCount',
-                'orderMonthTotal'
-            ),
-        );
+        $date_order = Carbon::now();
+        $date_order = $date_order->format('Y-m-d');
+        $saleCountDay = Order::whereDate('date_order', '=', Carbon::now()->format('Y-m-d'))->get()->count("id");
+        $saleTotalDay = Order::whereDate('date_order', '=', Carbon::now()->format('Y-m-d'))->sum("total");
+        $saleCountMonth = Order::whereMonth('date_order', date('m'))->get()->count("id");
+        $saleTotalMonth = Order::whereMonth('date_order', date('m'))->sum("total");
+        return view('home', compact('productCount', 'clientCount', 'saleCountDay', 'saleTotalDay', 'saleCountMonth', 'saleTotalMonth'));
     }
 }
