@@ -35,7 +35,7 @@
                                 <th>{{ $detail->product->name }}</th>
                                 <th> ${{ $detail->product->price }} </th>
                                 <th> {{ $detail->quantity }} </th>
-                                <th>${{ $detail->subtotal }}</th>
+                                <th>${{ $detail->product->price * $detail->quantity }}</th>
                             </tr>
                         @endforeach
 
