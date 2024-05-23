@@ -22,7 +22,7 @@ class OrderController extends Controller
     {
         $orders = Order::all();
 
-        return view('orders.index', compact('orders', 'totals'));
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -45,7 +45,7 @@ class OrderController extends Controller
         try {
             $order = Order::create([
                 'date_order' => Carbon::now()->toDateTimeString(),
-                'total' => 0,
+                'total' => $request->total,
                 'route' => "Por hacer",
                 'client_id' => Client::find($request->client)->id,
                 'status' => 1,

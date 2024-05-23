@@ -163,6 +163,7 @@
         let nodeInputPrice = document.querySelector('[name="price"]')
         let nodeInputQuantity = document.querySelector('[name="quantity"]')
         let nodeInputSubtotal = document.querySelector('[name="subtotal"]')
+        let nodeInputTotal = document.querySelector('[name="total"]')
         let nodeListProducts = document.querySelector('#list-products')
 
         function clearInputFields() {
@@ -183,6 +184,7 @@
 
             document.querySelector('#total-text').innerText = `Total: $${total}`
             document.querySelector('[name="total"]').value = total
+            nodeInputTotal.value = total
 
             nodeListProducts.innerHTML += order.generateHTML()
         }
@@ -215,6 +217,7 @@
                 currentOrder.id = parseInt(productSelect.find(':selected').val())
                 currentOrder.name = productSelect.find(':selected').data('name')
                 currentOrder.price = parseInt(productSelect.find(':selected').data('price'))
+                currentOrder.quantity = 0
 
                 updateCurrentOrder()
             });

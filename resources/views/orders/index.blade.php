@@ -49,7 +49,7 @@
                                                 <td>{{ $order->client->name }}</td>
                                                 <td>{{ $order->client->document }}</td>
                                                 <td>{{ $order->date_order }}</td>
-                                                <td>$ssdlf</td>
+                                                <td>${{ $order->total }}</td>
 
                                                 <td>
                                                     <input data-id="{{ $order->id }}" class="toggle-class"
