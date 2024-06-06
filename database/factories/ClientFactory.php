@@ -18,6 +18,7 @@ class ClientFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
+            'photo' => randomPhoto(),
             'document' => $this->faker->unique()->numberBetween(1234567890, 2134567890),
             'address' => $this->faker->unique()->address,
             'city' => $this->faker->city,
@@ -27,4 +28,9 @@ class ClientFactory extends Factory
             'status' => "1",
         ];
     }
+}
+
+function randomPhoto(): string
+{
+    return "dummyPhoto/" . rand(1, 15) . ".jpg";
 }

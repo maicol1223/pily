@@ -18,10 +18,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(100)->create();
+        User::factory(20)->create();
+        Product::factory(20)->create();
+        Client::factory(20)->create();
 
-        Order::factory(100)
-            ->has(OrderDetail::factory()->count(1))
+        $orders = Order::factory(50)
+            ->has(OrderDetail::factory()->count(5))
             ->create();
+            foreach ($orders as $order) {
+                $order->generatePDF();
+            
     }
+}
+
 }
